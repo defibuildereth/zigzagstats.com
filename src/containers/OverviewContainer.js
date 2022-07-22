@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Bar } from 'react-chartjs-2';
+import { Chart } from 'react-chartjs-2';
 import "chartjs-adapter-moment";
 
 
@@ -11,6 +11,9 @@ import {
     Title,
     Tooltip,
     Legend,
+    PointElement,
+    LineElement,
+    CategoryScale,
 } from 'chart.js';
 
 const OverviewContainer = () => {
@@ -19,11 +22,11 @@ const OverviewContainer = () => {
 
     useEffect(() => {
         fetch(`${process.env.REACT_APP_API}/transactions/`)
-        .then(res => res.json())
-        .then(r => {
-            setTransactions(r)
-            makeValues(transactions)
-        })
+            .then(res => res.json())
+            .then(r => {
+                setTransactions(r)
+                makeValues(transactions)
+            })
         // fetch(`${process.env.REACT_APP_API}/addresses/`)
         // .then(res => res.json())
         // .then(r => {
@@ -36,6 +39,9 @@ const OverviewContainer = () => {
         TimeScale,
         LinearScale,
         BarElement,
+        PointElement,
+        LineElement,
+        CategoryScale,
         Title,
         Tooltip,
         Legend
@@ -47,21 +53,27 @@ const OverviewContainer = () => {
         for (let i = 0; i < transactionsArray.length; i++) {
             const date = Date.parse(transactionsArray[i].date.split('-').join(' '))
             const number = transactionsArray[i].feeArray.length
-            array.push({x: date, y: number})
+            array.push({ x: date, y: number })
         }
         return array
     }
 
     const values = makeValues(transactions)
+    console.log(values)
 
     const data = {
-        datasets: [
-            {
-                label: 'Transactions',
-                data: values,
-                backgroundColor: 'rgba(235, 99, 132, 0.8)',
-            },
-        ],
+        datasets: [{
+            type: 'bar',
+            label: 'Bar Dataset',
+            data: values,
+            backgroundColor: 'rgba(235, 99, 132, 0.8)',
+
+        }, {
+            type: 'line',
+            label: 'Line Dataset',
+            data: [{x: 1658358000000, y:500}, {x:1658444400000, y:5000}],
+        }],
+        // labels: ['January', 'February']
     };
 
     const options = {
@@ -87,7 +99,7 @@ const OverviewContainer = () => {
 
     return (
         <>
-        {transactions ? <Bar options={options} data={data} /> : <p>Loading</p>  }
+            {transactions ? <Chart options={options} data={data} /> : <p>Loading</p>}
         </>
     )
 }
