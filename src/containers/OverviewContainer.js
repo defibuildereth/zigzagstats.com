@@ -20,7 +20,7 @@ const OverviewContainer = () => {
 
     const [transactions, setTransactions] = useState([])
     const [fee, setFee] = useState([])
-
+    const [activeUsers, setActiveUsers] = useState([])
 
     useEffect(() => {
         fetch(`${process.env.REACT_APP_API}/transactions/`)
@@ -32,12 +32,11 @@ const OverviewContainer = () => {
             .then(r => {
                 setFee(r)
             })
-        // fetch(`${process.env.REACT_APP_API}/addresses/`)
-        // .then(res => res.json())
-        // .then(r => {
-        //     setTransactions(r)
-        //     makeValues(transactions)
-        // })
+        getActiveUsers(Date.now())
+            .then(r => {
+                setActiveUsers(r)
+            })
+
     }, []);
 
     ChartJS.register(
@@ -51,6 +50,38 @@ const OverviewContainer = () => {
         Tooltip,
         Legend
     );
+
+    const getActiveUsers = async function (timeStamp) {
+        let hour = 3.6 * 10 ** 6
+        let day = hour * 24
+        let week = day * 7
+        let month = day * 30
+        let array = [hour, day, week, month]
+        const promiseArray = array.map(item => {
+            let url = `${process.env.REACT_APP_API}/addresses/time/${timeStamp - item}`
+            return apiCallLengthOnly(url)
+        })
+        let allUsersUrl = `${process.env.REACT_APP_API}/addresses/`
+        promiseArray.push(apiCallLengthOnly(allUsersUrl))
+        let activeUsers = await promiseAll(promiseArray)
+        return activeUsers
+    }
+
+    async function apiCallLengthOnly(url) {
+        let response = await fetch(url)
+        let data = await response.json()
+        // console.log(data.length)
+        return data.length
+    }
+
+    async function promiseAll(promises, errors) {
+        return Promise.all(promises.map(p => {
+            return p.catch(e => {
+                errors.push(e.response);
+                return null;
+            })
+        }))
+    }
 
     const getFee = async function () {
         let fee;
@@ -71,7 +102,7 @@ const OverviewContainer = () => {
         return fee
     }
 
-    const makeValues = function (transactionsArray) {
+    const makeDailyTxsValues = function (transactionsArray) {
         let array = []
 
         for (let i = 0; i < transactionsArray.length; i++) {
@@ -82,7 +113,7 @@ const OverviewContainer = () => {
         return array
     }
 
-    const makeCumulative = function (transactionsArray) {
+    const makeDailyTxsCumulative = function (transactionsArray) {
         let array = []
         let cumulative = 0;
 
@@ -95,10 +126,10 @@ const OverviewContainer = () => {
         return array
     }
 
-    const dailyTransactions = makeValues(transactions)
-    const cumulativeTransactions = makeCumulative(transactions)
+    const dailyTransactions = makeDailyTxsValues(transactions)
+    const cumulativeTransactions = makeDailyTxsCumulative(transactions)
 
-    const data = {
+    const dailyTxsData = {
         datasets: [{
             type: 'bar',
             label: 'Daily Transactions',
@@ -113,7 +144,7 @@ const OverviewContainer = () => {
         }],
     };
 
-    const options = {
+    const dailyTxsOptions = {
         responsive: true,
         plugins: {
             legend: {
@@ -136,8 +167,16 @@ const OverviewContainer = () => {
 
     return (
         <>
-        {fee ? <p>Current Fee: {fee.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</p> : null}
-            {transactions ? <Chart options={options} data={data} /> : <p>Loading</p>}
+            {activeUsers ? <><p>Active Users</p>
+                <p>Hourly: {activeUsers[0]}</p>
+                <p>Daily: {activeUsers[1]}</p>
+                <p>Weekly: {activeUsers[2]}</p>
+                <p>Monthly: {activeUsers[3]}</p>
+                <p>Total: {activeUsers[4]}</p>
+            </> : null}
+            <br></br>
+            {fee ? <p>Current Fee: {fee.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</p> : null}
+            {transactions ? <Chart options={dailyTxsOptions} data={dailyTxsData} /> : <p>Loading</p>}
         </>
     )
 }
