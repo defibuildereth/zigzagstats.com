@@ -49,7 +49,7 @@ const DailyTransactionsChart = ({ transactions }) => {
         for (let i = 0; i < transactionsArray.length; i++) {
             const date = Date.parse(transactionsArray[i].date.split('-').join(' '))
             const number = transactionsArray[i].feeArray.length + cumulative;
-            cumulative = cumulative + number
+            cumulative = number
             array.push({ x: date, y: number })
         }
         return array

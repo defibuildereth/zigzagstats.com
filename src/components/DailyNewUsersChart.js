@@ -71,8 +71,9 @@ const DailyNewUsersChart = ({ transactions }) => {
 
         for (let i = 0; i < info.length; i++) {
             const number = info[i].y + cumulative;
-            cumulative = cumulative + number
             array.push({ x: info[i].x, y: number })
+            cumulative = number
+
         }
         return array
     }
@@ -86,14 +87,14 @@ const DailyNewUsersChart = ({ transactions }) => {
             data: dailyNewUsers,
             backgroundColor: 'rgba(235, 99, 132, 0.8)',
 
-        }, 
+        },
         {
             type: 'line',
             label: 'Cumulative',
             data: cumulativeTransactions,
             backgroundColor: 'blue',
         }
-    ],
+        ],
     };
 
     const dailyNewUsersOptions = {
