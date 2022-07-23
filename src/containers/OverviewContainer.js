@@ -82,13 +82,13 @@ const OverviewContainer = () => {
 
     return (
         <>
-            {activeUsers ? <ActiveUsers activeUsers={activeUsers}></ActiveUsers> : null}
-            <br></br>
-            {fee ? <Fee fee={fee}></Fee> : null}
-            {transactions ? <>
-            <DailyTransactionsChart transactions={transactions}></DailyTransactionsChart>
-            <DailyNewUsersChart transactions={transactions}></DailyNewUsersChart>
-            </> : null}
+            {activeUsers && fee && transactions ? <>
+                <ActiveUsers activeUsers={activeUsers}></ActiveUsers>
+                <Fee fee={fee}></Fee>
+                <DailyTransactionsChart transactions={transactions}></DailyTransactionsChart>
+                <DailyNewUsersChart transactions={transactions}></DailyNewUsersChart>
+            </> : <p>loading...</p>}
+            
         </>
     )
 }
