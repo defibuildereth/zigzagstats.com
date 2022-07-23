@@ -3,6 +3,7 @@ import axios from 'axios';
 import DailyTransactionsChart from '../components/DailyTransactionsChart';
 import Fee from '../components/Fee';
 import ActiveUsers from '../components/ActiveUsers';
+import DailyNewUsersChart from '../components/DailyNewUsersChart';
 
 
 
@@ -18,9 +19,6 @@ const OverviewContainer = () => {
             .then(r => {
                 setTransactions(r)
             })
-        // .then(() => {
-        //     getDailyNewUsers(transactions)
-        // })
         getFee()
             .then(r => {
                 setFee(r)
@@ -87,7 +85,10 @@ const OverviewContainer = () => {
             {activeUsers ? <ActiveUsers activeUsers={activeUsers}></ActiveUsers> : null}
             <br></br>
             {fee ? <Fee fee={fee}></Fee> : null}
-            {transactions ? <DailyTransactionsChart transactions={transactions}></DailyTransactionsChart> : null}
+            {transactions ? <>
+            <DailyTransactionsChart transactions={transactions}></DailyTransactionsChart>
+            <DailyNewUsersChart transactions={transactions}></DailyNewUsersChart>
+            </> : null}
         </>
     )
 }
