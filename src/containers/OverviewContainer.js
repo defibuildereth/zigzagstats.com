@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import DailyTransactionsChart from '../components/DailyTransactionsChart';
+import Fee from '../components/Fee';
+import ActiveUsers from '../components/ActiveUsers';
 
 
 
@@ -16,9 +18,9 @@ const OverviewContainer = () => {
             .then(r => {
                 setTransactions(r)
             })
-            // .then(() => {
-            //     getDailyNewUsers(transactions)
-            // })
+        // .then(() => {
+        //     getDailyNewUsers(transactions)
+        // })
         getFee()
             .then(r => {
                 setFee(r)
@@ -28,12 +30,6 @@ const OverviewContainer = () => {
                 setActiveUsers(r)
             })
     }, []);
-
-
-
-    // const getDailyNewUsers = async function (transactions) {
-    //     console.log(transactions)
-    // }
 
     const getActiveUsers = async function (timeStamp) {
         let hour = 3.6 * 10 ** 6
@@ -86,19 +82,11 @@ const OverviewContainer = () => {
         return fee
     }
 
-
-
     return (
         <>
-            {activeUsers ? <><p>Active Users</p>
-                <p>Hourly: {activeUsers[0]}</p>
-                <p>Daily: {activeUsers[1]}</p>
-                <p>Weekly: {activeUsers[2]}</p>
-                <p>Monthly: {activeUsers[3]}</p>
-                <p>Total: {activeUsers[4]}</p>
-            </> : null}
+            {activeUsers ? <ActiveUsers activeUsers={activeUsers}></ActiveUsers> : null}
             <br></br>
-            {fee ? <p>Current Fee: {fee.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</p> : null}
+            {fee ? <Fee fee={fee}></Fee> : null}
             {transactions ? <DailyTransactionsChart transactions={transactions}></DailyTransactionsChart> : null}
         </>
     )
