@@ -1,26 +1,14 @@
 import React, { useState, useEffect } from 'react'
-import { Chart } from 'react-chartjs-2';
-import "chartjs-adapter-moment";
 import axios from 'axios';
+import DailyTransactionsChart from '../components/DailyTransactionsChart';
 
-import {
-    Chart as ChartJS,
-    TimeScale,
-    LinearScale,
-    BarElement,
-    Title,
-    Tooltip,
-    Legend,
-    PointElement,
-    LineElement,
-    CategoryScale,
-} from 'chart.js';
+
 
 const OverviewContainer = () => {
 
-    const [transactions, setTransactions] = useState([])
-    const [fee, setFee] = useState([])
-    const [activeUsers, setActiveUsers] = useState([])
+    const [transactions, setTransactions] = useState("")
+    const [fee, setFee] = useState("")
+    const [activeUsers, setActiveUsers] = useState("")
 
     useEffect(() => {
         fetch(`${process.env.REACT_APP_API}/transactions/`)
@@ -28,6 +16,9 @@ const OverviewContainer = () => {
             .then(r => {
                 setTransactions(r)
             })
+            // .then(() => {
+            //     getDailyNewUsers(transactions)
+            // })
         getFee()
             .then(r => {
                 setFee(r)
@@ -36,20 +27,13 @@ const OverviewContainer = () => {
             .then(r => {
                 setActiveUsers(r)
             })
-
     }, []);
 
-    ChartJS.register(
-        TimeScale,
-        LinearScale,
-        BarElement,
-        PointElement,
-        LineElement,
-        CategoryScale,
-        Title,
-        Tooltip,
-        Legend
-    );
+
+
+    // const getDailyNewUsers = async function (transactions) {
+    //     console.log(transactions)
+    // }
 
     const getActiveUsers = async function (timeStamp) {
         let hour = 3.6 * 10 ** 6
@@ -102,68 +86,7 @@ const OverviewContainer = () => {
         return fee
     }
 
-    const makeDailyTxsValues = function (transactionsArray) {
-        let array = []
 
-        for (let i = 0; i < transactionsArray.length; i++) {
-            const date = Date.parse(transactionsArray[i].date.split('-').join(' '))
-            const number = transactionsArray[i].feeArray.length
-            array.push({ x: date, y: number })
-        }
-        return array
-    }
-
-    const makeDailyTxsCumulative = function (transactionsArray) {
-        let array = []
-        let cumulative = 0;
-
-        for (let i = 0; i < transactionsArray.length; i++) {
-            const date = Date.parse(transactionsArray[i].date.split('-').join(' '))
-            const number = transactionsArray[i].feeArray.length + cumulative;
-            cumulative = cumulative + number
-            array.push({ x: date, y: number })
-        }
-        return array
-    }
-
-    const dailyTransactions = makeDailyTxsValues(transactions)
-    const cumulativeTransactions = makeDailyTxsCumulative(transactions)
-
-    const dailyTxsData = {
-        datasets: [{
-            type: 'bar',
-            label: 'Daily Transactions',
-            data: dailyTransactions,
-            backgroundColor: 'rgba(235, 99, 132, 0.8)',
-
-        }, {
-            type: 'line',
-            label: 'Cumulative',
-            data: cumulativeTransactions,
-            backgroundColor: 'blue',
-        }],
-    };
-
-    const dailyTxsOptions = {
-        responsive: true,
-        plugins: {
-            legend: {
-                position: 'top',
-            },
-            title: {
-                display: true,
-                text: 'ZigZag Daily Transactions',
-            },
-        },
-        scales: {
-            x: {
-                type: 'time',
-                time: {
-                    unit: 'day'
-                }
-            }
-        }
-    };
 
     return (
         <>
@@ -176,7 +99,7 @@ const OverviewContainer = () => {
             </> : null}
             <br></br>
             {fee ? <p>Current Fee: {fee.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</p> : null}
-            {transactions ? <Chart options={dailyTxsOptions} data={dailyTxsData} /> : <p>Loading</p>}
+            {transactions ? <DailyTransactionsChart transactions={transactions}></DailyTransactionsChart> : null}
         </>
     )
 }
