@@ -120,7 +120,7 @@ const DailyNewUsersChart = ({ transactions }) => {
 
     return (
         <>
-            {dailyNewUsers ? <Chart data={dailyNewUsersData} options={dailyNewUsersOptions}></Chart> : null}
+            {dailyNewUsers ? <Chart id='myId' data={dailyNewUsersData} options={dailyNewUsersOptions}></Chart> : null}
         </>
     )
 }
