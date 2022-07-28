@@ -66,15 +66,29 @@ const DailyNewUsersChart = ({ transactions }) => {
     }
 
     const makeDailyNewUsersCumulative = function (info) {
+        function compare(a, b) {
+            if (a.x < b.x) {
+                return -1;
+            }
+            if (a.x > b.x) {
+                return 1;
+            }
+            return 0;
+        }
         let array = []
         let cumulative = 0;
 
-        for (let i = 0; i < info.length; i++) {
-            const number = info[i].y + cumulative;
-            array.push({ x: info[i].x, y: number })
-            cumulative = number
-
+        if (info.length > 0) {
+            let orderedInfo = info.sort(compare)
+            for (let i = 0; i < orderedInfo.length; i++) {
+                const number = orderedInfo[i].y + cumulative;
+                array.push({ x: orderedInfo[i].x, y: number })
+                cumulative = number
+            }
         }
+
+
+
         return array
     }
 
