@@ -4,6 +4,7 @@ import DailyTransactionsChart from '../components/DailyTransactionsChart';
 import Fee from '../components/Fee';
 import ActiveUsers from '../components/ActiveUsers';
 import DailyNewUsersChart from '../components/DailyNewUsersChart';
+import FeeChart from '../components/FeeChart';
 
 
 
@@ -87,6 +88,7 @@ const OverviewContainer = () => {
                 <Fee fee={fee}></Fee>
                 <DailyTransactionsChart transactions={transactions}></DailyTransactionsChart>
                 <DailyNewUsersChart transactions={transactions}></DailyNewUsersChart>
+                <FeeChart transactions={transactions}></FeeChart>
             </> : <p>loading...</p>}
             
         </>

@@ -43,36 +43,21 @@ const DailyTransactionsChart = ({ transactions }) => {
     }
 
     const makeDailyTxsCumulative = function (transactionsArray) {
-        console.log(transactionsArray)
 
         let array = []
         let cumulative = 0;
 
         if (transactionsArray.length > 0) {
-            // for (let i = 0; i < transactionsArray.length; i++) {
-            //     let date = (transactionsArray[i].date.split('-').join(' '))
-            //     let dateObject = new Date (date)
-            //     console.log(dateObject.getTime())
-            // }
             let ordered = transactionsArray.sort(function (a, b) {
-                // Turn your strings into dates, and then subtract them
-                // to get a value that is either negative, positive, or zero.
                 return (new Date(a.date.split('-').join(' '))).getTime() - (new Date(b.date.split('-').join(' '))).getTime();
             });
-            console.log(ordered)
             for (let i = 0; i < ordered.length; i++) {
                 const date = Date.parse(ordered[i].date.split('-').join(' '))
                 const number = ordered[i].feeArray.length + cumulative;
                 cumulative = number
                 array.push({ x: date, y: number })
             }
-
         }
-
-
-
-
-
         return array
     }
 
