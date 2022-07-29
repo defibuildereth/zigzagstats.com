@@ -39,10 +39,16 @@ const FeeChart = ({ transactions }) => {
                 return (new Date(a.date.split('-').join(' '))).getTime() - (new Date(b.date.split('-').join(' '))).getTime();
             });
             for (let i = 0; i < ordered.length; i++) {
+                let orderedFilteredFeeArray = ordered[i].feeArray.filter(value => typeof (value) === 'number')
                 const date = Date.parse(ordered[i].date.split('-').join(' '))
-                let sum = ordered[i].feeArray.reduce((previousValue, currentValue) => previousValue + currentValue)
-                const number = sum/ordered[i].feeArray.length;
-                array.push({ x: date, y: number })
+                if (orderedFilteredFeeArray.length > 0) {
+                    let sum = orderedFilteredFeeArray.reduce((previousValue, currentValue) => previousValue + currentValue)
+                    const number = sum / orderedFilteredFeeArray.length;
+                    array.push({ x: date, y: number })
+                } else {
+                    array.push({x:date, y: null})
+                }
+
             }
         }
         return array
@@ -68,7 +74,7 @@ const FeeChart = ({ transactions }) => {
             },
             title: {
                 display: true,
-                text: 'ZigZag Daily Transactions',
+                text: 'ZigZag Daily Average Fees',
             },
         },
         scales: {
