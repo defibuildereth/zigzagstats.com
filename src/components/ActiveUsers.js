@@ -7,11 +7,11 @@ const ActiveUsers = ({activeUsers}) => {
     return (
         <>
                 <p>Active Users</p>
-                <p>Hourly: {activeUsersNow[0]}</p>
-                <p>Daily: {activeUsersNow[1]}</p>
-                <p>Weekly: {activeUsersNow[2]}</p>
-                <p>Monthly: {activeUsersNow[3]}</p>
-                <p>Total: {activeUsersNow[4]}</p>
+                <p>Hourly: {activeUsersNow[0].toLocaleString()}</p>
+                <p>Daily: {activeUsersNow[1].toLocaleString()}</p>
+                <p>Weekly: {activeUsersNow[2].toLocaleString()}</p>
+                <p>Monthly: {activeUsersNow[3].toLocaleString()}</p>
+                <p>Total: {activeUsersNow[4].toLocaleString()}</p>
         </>
     )
 }
