@@ -8,7 +8,6 @@ import {
 } from "react-router-dom";
 import axios from 'axios';
 
-import OverviewContainer from './containers/OverviewContainer';
 import Navbar from './containers/Navbar';
 import FeeContainer from './containers/FeeContainer';
 import UsersContainer from './containers/UsersContainer';
@@ -110,10 +109,6 @@ function App() {
           </Route>
         </Switch>
       </> : <p>loading...</p>}
-
-      {/* <OverviewContainer>
-
-      </OverviewContainer> */}
     </Router>
 
   );
