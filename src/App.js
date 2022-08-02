@@ -12,6 +12,7 @@ import OverviewContainer from './containers/OverviewContainer';
 import Navbar from './containers/Navbar';
 import FeeContainer from './containers/FeeContainer';
 import UsersContainer from './containers/UsersContainer';
+import VolumeContainer from './containers/VolumeContainer';
 
 
 
@@ -99,12 +100,13 @@ function App() {
             <h1>Fees</h1>
             <FeeContainer fee={fee} transactions={transactions}></FeeContainer>
           </Route>
-          <Route path="/users">
-            <h1>Users</h1>
-            <UsersContainer transactions={transactions} activeUsers={activeUsers}></UsersContainer>
+          <Route path="/volume">
+            <h1>Volume</h1>
+            <VolumeContainer transactions={transactions}></VolumeContainer>
           </Route>
           <Route path="/">
-            <h1>Home</h1>
+            <h1>Users</h1>
+            <UsersContainer transactions={transactions} activeUsers={activeUsers}></UsersContainer>
           </Route>
         </Switch>
       </> : <p>loading...</p>}
