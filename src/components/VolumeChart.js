@@ -36,6 +36,7 @@ const VolumeChart = ({volume}) => {
             let value = Number(array[i][1])
             newArray.push({ x: date, y: value })
         }
+        console.log(newArray)
         return newArray
     }
 

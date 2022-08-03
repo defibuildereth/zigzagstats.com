@@ -16,6 +16,9 @@ const Navbar = () => {
                     <li>
                         <Link to="/volume">Volume</Link>
                     </li>
+                    <li>
+                        <Link to="/token">Token</Link>
+                    </li>
                 </ul>
             </nav>
         </>

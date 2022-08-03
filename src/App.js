@@ -12,6 +12,7 @@ import Navbar from './containers/Navbar';
 import FeeContainer from './containers/FeeContainer';
 import UsersContainer from './containers/UsersContainer';
 import VolumeContainer from './containers/VolumeContainer';
+import TokenContainer from './containers/TokenContainer';
 
 
 
@@ -115,6 +116,9 @@ function App() {
           </Route>
           <Route path="/volume">
             <VolumeContainer transactions={transactions} volume={volume}></VolumeContainer>
+          </Route>
+          <Route path="/token">
+            <TokenContainer></TokenContainer>
           </Route>
           <Route path="/">
             <UsersContainer transactions={transactions} activeUsers={activeUsers}></UsersContainer>
