@@ -13,6 +13,7 @@ import {
     PointElement,
     LineElement,
     CategoryScale,
+    LogarithmicScale
 } from 'chart.js';
 
 const ZZTokenVolumeChart = ({ tokenVolumeInfo }) => {
@@ -24,6 +25,7 @@ const ZZTokenVolumeChart = ({ tokenVolumeInfo }) => {
         PointElement,
         LineElement,
         CategoryScale,
+        LogarithmicScale,
         Title,
         Tooltip,
         Legend
@@ -58,6 +60,9 @@ const ZZTokenVolumeChart = ({ tokenVolumeInfo }) => {
                     unit: 'day'
                 }
             },
+            y: {
+                type: 'logarithmic'
+            }
         }
     };
 
