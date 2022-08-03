@@ -15,7 +15,7 @@ import {
     CategoryScale,
 } from 'chart.js';
 
-const TokenChart = ({tokenPriceInfo}) => {
+const ZZTokenVolumeChart = ({ tokenVolumeInfo }) => {
 
     ChartJS.register(
         TimeScale,
@@ -29,19 +29,18 @@ const TokenChart = ({tokenPriceInfo}) => {
         Legend
     );
 
-    const tokenChartData = {
+    const tokenVolumeData = {
         datasets: [
             {
                 type: 'line',
-                label: 'Token Price',
-                yAxisID: 'A',
-                data: tokenPriceInfo,
+                label: 'Trading Volume',
+                data: tokenVolumeInfo,
                 backgroundColor: 'rgba(235, 99, 132, 0.8)',
             },
         ],
     };
 
-    const tokenChartOptions = {
+    const tokenVolumeOptions = {
         responsive: true,
         plugins: {
             legend: {
@@ -49,7 +48,7 @@ const TokenChart = ({tokenPriceInfo}) => {
             },
             title: {
                 display: true,
-                text: 'ZigZag Token Price ($usd)',
+                text: 'ZigZag Token Trading Volume ($usd)',
             },
         },
         scales: {
@@ -64,10 +63,9 @@ const TokenChart = ({tokenPriceInfo}) => {
 
     return (
         <>
-            <Chart options={tokenChartOptions} data={tokenChartData}></Chart>
+            <Chart options={tokenVolumeOptions} data={tokenVolumeData}></Chart>
         </>
     )
 }
 
-export default TokenChart;
-
+export default ZZTokenVolumeChart;
