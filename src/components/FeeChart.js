@@ -48,7 +48,6 @@ const FeeChart = ({ transactions }) => {
                 } else {
                     array.push({x:date, y: null})
                 }
-
             }
         }
         return array

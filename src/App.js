@@ -96,15 +96,12 @@ function App() {
       {activeUsers && fee && transactions ? <>
         <Switch>
           <Route path="/fees">
-            <h1>Fees</h1>
             <FeeContainer fee={fee} transactions={transactions}></FeeContainer>
           </Route>
           <Route path="/volume">
-            <h1>Volume</h1>
             <VolumeContainer transactions={transactions}></VolumeContainer>
           </Route>
           <Route path="/">
-            <h1>Users</h1>
             <UsersContainer transactions={transactions} activeUsers={activeUsers}></UsersContainer>
           </Route>
         </Switch>

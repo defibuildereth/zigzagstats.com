@@ -6,6 +6,7 @@ const FeeContainer = ({ fee, transactions }) => {
 
     return (
         <>
+            <h1>Fees</h1>
             <Fee fee={fee}></Fee>
             <FeeChart transactions={transactions}></FeeChart>
         </>
