@@ -20,6 +20,7 @@ function App() {
   const [transactions, setTransactions] = useState("")
   const [fee, setFee] = useState("")
   const [activeUsers, setActiveUsers] = useState("")
+  const [volume, setVolume] = useState("")
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API}/transactions/`)
@@ -35,7 +36,21 @@ function App() {
       .then(r => {
         setActiveUsers(r)
       })
+    getVolume()
+      .then(res => {
+        setVolume(res)
+      })
   }, []);
+
+  const getVolume = async function () {
+    let vol;
+    await fetch('https://api.coingecko.com/api/v3/exchanges/zigzag/volume_chart?days=180')
+      .then(r => r.json())
+      .then(res => {
+        vol = res
+      })
+    return vol
+  }
 
   const getActiveUsers = async function (timeStamp) {
     let hour = 3.6 * 10 ** 6
@@ -93,13 +108,13 @@ function App() {
     <Router>
       <h1>ZigZagStats.com</h1>
       <Navbar />
-      {activeUsers && fee && transactions ? <>
+      {activeUsers && fee && transactions && volume ? <>
         <Switch>
           <Route path="/fees">
             <FeeContainer fee={fee} transactions={transactions}></FeeContainer>
           </Route>
           <Route path="/volume">
-            <VolumeContainer transactions={transactions}></VolumeContainer>
+            <VolumeContainer transactions={transactions} volume={volume}></VolumeContainer>
           </Route>
           <Route path="/">
             <UsersContainer transactions={transactions} activeUsers={activeUsers}></UsersContainer>
