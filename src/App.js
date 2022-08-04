@@ -3,10 +3,10 @@ import React, { useState, useEffect } from 'react'
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 import axios from 'axios';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 import Navbar from './containers/Navbar';
 import FeeContainer from './containers/FeeContainer';
@@ -121,27 +121,36 @@ function App() {
 
 
   return (
-    <Router>
-      <h1>ZigZagStats.com</h1>
-      <Navbar />
-      {activeUsers && fee && transactions && volume && token ? <>
-        <Switch>
-          <Route path="/fees">
-            <FeeContainer fee={fee} transactions={transactions}></FeeContainer>
-          </Route>
-          <Route path="/volume">
-            <VolumeContainer transactions={transactions} volume={volume}></VolumeContainer>
-          </Route>
-          <Route path="/token">
-            <TokenContainer token={token}></TokenContainer>
-          </Route>
-          <Route path="/">
-            <UsersContainer transactions={transactions} activeUsers={activeUsers}></UsersContainer>
-          </Route>
-        </Switch>
-      </> : <p>loading...</p>}
-    </Router>
-
+    <>
+      <HelmetProvider>
+        <Helmet>
+          <title>ZigZagStats.com - Key Metrics From ZigZag Exchange</title>
+          <meta
+            name="description"
+            content="Track new and active users per day, current and historic platform fees, total trading volume and ZZ token price history."
+            data-react-helmet="true" />;
+        </Helmet><Router>
+          <h1>ZigZagStats.com</h1>
+          <Navbar />
+          {activeUsers && fee && transactions && volume && token ? <>
+            <Switch>
+              <Route path="/fees">
+                <FeeContainer fee={fee} transactions={transactions}></FeeContainer>
+              </Route>
+              <Route path="/volume">
+                <VolumeContainer transactions={transactions} volume={volume}></VolumeContainer>
+              </Route>
+              <Route path="/token">
+                <TokenContainer token={token}></TokenContainer>
+              </Route>
+              <Route path="/">
+                <UsersContainer transactions={transactions} activeUsers={activeUsers}></UsersContainer>
+              </Route>
+            </Switch>
+          </> : <p>loading...</p>}
+        </Router>
+      </HelmetProvider>
+    </>
   );
 }
 
