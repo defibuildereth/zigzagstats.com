@@ -128,7 +128,19 @@ function App() {
           <meta
             name="description"
             content="Track new and active users per day, current and historic platform fees, total trading volume and ZZ token price history."
-            data-react-helmet="true" />;
+          />;
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:image" content="https://imgur.com/gO4klRT" />
+          <meta
+            name="twitter:title"
+            content="ZigZagStats.com - Key Metrics From ZigZag Exchange"
+          />
+          <meta name="twitter:creator" content="@DefiBuilderETH" />
+          <meta name="twitter:site" content="@DefiBuilderETH" />
+          <meta
+            name="twitter:description"
+            content="Track new and active users per day, current and historic platform fees, total trading volume and ZZ token price history."
+          />
         </Helmet><Router>
           <h1>ZigZagStats.com</h1>
           <Navbar />
