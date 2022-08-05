@@ -142,7 +142,7 @@ function App() {
             content="Track new and active users per day, current and historic platform fees, total trading volume and ZZ token price history."
           />
         </Helmet><Router>
-          <h1>ZigZagStats.com</h1>
+          <h1 class="text-3xl font-bold underline">ZigZagStats.com</h1>
           <Navbar />
           {activeUsers && fee && transactions && volume && token ? <>
             <Switch>
