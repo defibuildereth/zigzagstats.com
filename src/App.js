@@ -2,7 +2,7 @@ import './App.css';
 import React, { useState, useEffect } from 'react'
 import {
   BrowserRouter as Router,
-  Switch,
+  Routes,
   Route
 } from "react-router-dom";
 import axios from 'axios';
@@ -13,9 +13,6 @@ import FeeContainer from './containers/FeeContainer';
 import UsersContainer from './containers/UsersContainer';
 import VolumeContainer from './containers/VolumeContainer';
 import TokenContainer from './containers/TokenContainer';
-import TabsRender from './containers/Tabs';
-
-
 
 function App() {
 
@@ -144,23 +141,23 @@ function App() {
           />
         </Helmet><Router>
           <h1 class="text-3xl font-bold underline flex justify-center ">ZigZagStats.com</h1>
-          {/* <TabsRender></TabsRender> */}
           <Navbar />
           {activeUsers && fee && transactions && volume && token ? <>
-            <Switch>
+            <Routes>
               <Route path="/fees">
-                <FeeContainer fee={fee} transactions={transactions}></FeeContainer>
+              <Route index element={<FeeContainer fee={fee} transactions={transactions}></FeeContainer>} />
+                
               </Route>
               <Route path="/volume">
-                <VolumeContainer transactions={transactions} volume={volume}></VolumeContainer>
+              <Route index element={<VolumeContainer volume={volume} transactions={transactions}></VolumeContainer>} />
               </Route>
               <Route path="/token">
-                <TokenContainer token={token}></TokenContainer>
+              <Route index element={<TokenContainer token={token}></TokenContainer>} />
               </Route>
-              <Route path="/">
-                <UsersContainer transactions={transactions} activeUsers={activeUsers}></UsersContainer>
+              <Route exact path="/">
+              <Route index element={<UsersContainer transactions={transactions} activeUsers={activeUsers}></UsersContainer>} />
               </Route>
-            </Switch>
+            </Routes>
           </> : <p>loading...</p>}
         </Router>
       </HelmetProvider>

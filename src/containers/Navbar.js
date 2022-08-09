@@ -1,26 +1,47 @@
 import React from 'react'
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
 
+    let activeStyle = "underline"
+
     return (
         <>
-            <nav>
-                <ul>
-                    <li>
-                        <Link to="/">Users</Link>
-                    </li>
-                    <li>
-                        <Link to="/fees">Fees</Link>
-                    </li>
-                    <li>
-                        <Link to="/volume">Volume</Link>
-                    </li>
-                    <li>
-                        <Link to="/token">Token</Link>
-                    </li>
-                </ul>
-            </nav>
+            <div className="flex flex-wrap">
+                <div className="w-full">
+                    <nav>
+                        <ul
+                            className="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row"
+                            role="tablist"
+                        >
+                            <li className="-mb-px mr-2 last:mr-0 flex-auto text-center">
+                                <NavLink className={({ isActive }) =>
+                                    isActive ? activeStyle : undefined
+                                }
+                                    to="/">Users</NavLink>
+                            </li>
+                            <li className="-mb-px mr-2 last:mr-0 flex-auto text-center">
+                                <NavLink className={({ isActive }) =>
+                                    isActive ? activeStyle : undefined
+                                }
+                                    to="/fees">Fees</NavLink>
+                            </li>
+                            <li className="-mb-px mr-2 last:mr-0 flex-auto text-center">
+                                <NavLink className={({ isActive }) =>
+                                    isActive ? activeStyle : undefined
+                                }
+                                    to="/volume">Volume</NavLink>
+                            </li>
+                            <li className="-mb-px mr-2 last:mr-0 flex-auto text-center">
+                                <NavLink className={({ isActive }) =>
+                                    isActive ? activeStyle : undefined
+                                }
+                                    to="/token">Token</NavLink>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
         </>
     )
 }
