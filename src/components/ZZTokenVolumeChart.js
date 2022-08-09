@@ -54,7 +54,7 @@ const ZZTokenVolumeChart = ({ tokenVolumeInfo }) => {
             },
             title: {
                 display: true,
-                text: 'ZigZag Exchange Volume (BTC)',
+                text: 'ZigZag Token Trading Volume ($usd)',
                 color: '#FFFFFF'
             },
         },
