@@ -13,6 +13,7 @@ import FeeContainer from './containers/FeeContainer';
 import UsersContainer from './containers/UsersContainer';
 import VolumeContainer from './containers/VolumeContainer';
 import TokenContainer from './containers/TokenContainer';
+import TabsRender from './containers/Tabs';
 
 
 
@@ -142,7 +143,8 @@ function App() {
             content="Track new and active users per day, current and historic platform fees, total trading volume and ZZ token price history."
           />
         </Helmet><Router>
-          <h1 class="text-3xl font-bold underline">ZigZagStats.com</h1>
+          <h1 class="text-3xl font-bold underline flex justify-center ">ZigZagStats.com</h1>
+          {/* <TabsRender></TabsRender> */}
           <Navbar />
           {activeUsers && fee && transactions && volume && token ? <>
             <Switch>
