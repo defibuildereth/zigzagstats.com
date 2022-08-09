@@ -140,22 +140,21 @@ function App() {
             content="Track new and active users per day, current and historic platform fees, total trading volume and ZZ token price history."
           />
         </Helmet><Router>
-          <h1 id='mainTitle' class="text-3xl text-zzGreen font-bold flex justify-center ">ZigZagStats.com</h1>
+          <h1 id='mainTitle' className="text-3xl text-zzGreen font-bold flex justify-center ">ZigZagStats.com</h1>
           <Navbar />
           {activeUsers && fee && transactions && volume && token ? <>
             <Routes>
               <Route path="/fees">
               <Route index element={<FeeContainer fee={fee} transactions={transactions}></FeeContainer>} />
-                
               </Route>
-              <Route path="/volume">
-              <Route index element={<VolumeContainer volume={volume} transactions={transactions}></VolumeContainer>} />
+              <Route path="/users">
+              <Route index element={<UsersContainer transactions={transactions} activeUsers={activeUsers}></UsersContainer>} />
               </Route>
               <Route path="/token">
               <Route index element={<TokenContainer token={token}></TokenContainer>} />
               </Route>
               <Route exact path="/">
-              <Route index element={<UsersContainer transactions={transactions} activeUsers={activeUsers}></UsersContainer>} />
+              <Route index element={<VolumeContainer volume={volume} transactions={transactions}></VolumeContainer>} />
               </Route>
             </Routes>
           </> : <p>loading...</p>}
@@ -164,5 +163,7 @@ function App() {
     </>
   );
 }
+
+// {<UsersContainer transactions={transactions} activeUsers={activeUsers}></UsersContainer>}
 
 export default App;

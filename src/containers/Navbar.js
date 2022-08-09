@@ -21,7 +21,7 @@ const Navbar = () => {
                                 <NavLink className={({ isActive }) =>
                                     isActive ? activeStyle : inactiveStyle
                                 }
-                                    to="/">Users</NavLink>
+                                    to="/">Volume</NavLink>
                             </li>
                             <li className="-mb-px mr-2 last:mr-0 flex-auto text-center">
                                 <NavLink className={({ isActive }) =>
@@ -33,7 +33,7 @@ const Navbar = () => {
                                 <NavLink className={({ isActive }) =>
                                     isActive ? activeStyle : inactiveStyle
                                 }
-                                    to="/volume">Volume</NavLink>
+                                    to="/users">Users</NavLink>
                             </li>
                             <li className="-mb-px mr-2 last:mr-0 flex-auto text-center">
                                 <NavLink className={({ isActive }) =>
