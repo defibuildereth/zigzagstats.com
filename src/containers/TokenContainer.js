@@ -27,7 +27,6 @@ const TokenContainer = ({token}) => {
 
     return (
     <>
-        <h2>Token</h2>
         <TokenChart tokenPriceInfo={tokenChart.priceArray}></TokenChart>
         <ZZTokenVolumeChart tokenVolumeInfo={tokenChart.volumeArray}></ZZTokenVolumeChart>
     </>

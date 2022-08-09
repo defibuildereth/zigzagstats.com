@@ -5,6 +5,11 @@ module.exports = {
   ],
   theme: {
     extend: {},
+    colors: {
+      'zzBlueBright': '#55a9e8',
+      'zzGrey': '#446c8c',
+      'zzGreen': '#6debdc',
+    }
   },
   plugins: [],
 }

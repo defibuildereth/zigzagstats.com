@@ -99,14 +99,14 @@ const DailyNewUsersChart = ({ transactions }) => {
             type: 'bar',
             label: 'Daily New Users',
             data: dailyNewUsers,
-            backgroundColor: 'rgba(235, 99, 132, 0.8)',
+            backgroundColor: '#6debdc',
 
         },
         {
             type: 'line',
             label: 'Cumulative',
             data: cumulativeTransactions,
-            backgroundColor: 'blue',
+            backgroundColor: '#55a9e8',
         }
         ],
     };
@@ -116,19 +116,42 @@ const DailyNewUsersChart = ({ transactions }) => {
         plugins: {
             legend: {
                 position: 'top',
+                color: '#FFFFFF',
+                labels: {
+                    color: '#FFFFFF'
+                }
             },
             title: {
                 display: true,
                 text: 'ZigZag Daily New Users',
+                color: '#FFFFFF'
             },
         },
         scales: {
-            x: {
+            yAxes:{
+                grid: {
+                    drawBorder: true,
+                    color: '#FFFFFF',
+                },
+                ticks:{
+                    beginAtZero: true,
+                    color: 'white',
+                }
+            },
+            xAxes: {
                 type: 'time',
                 time: {
                     unit: 'day'
+                },
+                grid: {
+                    drawBorder: true,
+                    color: '#FFFFFF',
+                },
+                ticks:{
+                    beginAtZero: true,
+                    color: 'white',
                 }
-            }
+            },
         }
     };
 

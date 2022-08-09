@@ -3,7 +3,10 @@ import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
 
-    let activeStyle = "underline"
+    
+
+    let activeStyle = "text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal text-white bg-zzGreen"
+    let inactiveStyle = "text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal text-white bg-zzBlueBright" 
 
     return (
         <>
@@ -16,25 +19,25 @@ const Navbar = () => {
                         >
                             <li className="-mb-px mr-2 last:mr-0 flex-auto text-center">
                                 <NavLink className={({ isActive }) =>
-                                    isActive ? activeStyle : undefined
+                                    isActive ? activeStyle : inactiveStyle
                                 }
                                     to="/">Users</NavLink>
                             </li>
                             <li className="-mb-px mr-2 last:mr-0 flex-auto text-center">
                                 <NavLink className={({ isActive }) =>
-                                    isActive ? activeStyle : undefined
+                                    isActive ? activeStyle : inactiveStyle
                                 }
                                     to="/fees">Fees</NavLink>
                             </li>
                             <li className="-mb-px mr-2 last:mr-0 flex-auto text-center">
                                 <NavLink className={({ isActive }) =>
-                                    isActive ? activeStyle : undefined
+                                    isActive ? activeStyle : inactiveStyle
                                 }
                                     to="/volume">Volume</NavLink>
                             </li>
                             <li className="-mb-px mr-2 last:mr-0 flex-auto text-center">
                                 <NavLink className={({ isActive }) =>
-                                    isActive ? activeStyle : undefined
+                                    isActive ? activeStyle : inactiveStyle
                                 }
                                     to="/token">Token</NavLink>
                             </li>

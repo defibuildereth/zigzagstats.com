@@ -6,7 +6,6 @@ const UsersContainer = ({transactions, activeUsers}) => {
 
     return (
         <>
-            <h1>Users</h1>
             <ActiveUsers activeUsers={activeUsers}></ActiveUsers>
             <DailyNewUsersChart transactions={transactions}></DailyNewUsersChart>
         </>
