@@ -69,13 +69,13 @@ const DailyTransactionsChart = ({ transactions }) => {
             type: 'bar',
             label: 'Daily Transactions',
             data: dailyTransactions,
-            backgroundColor: 'rgba(235, 99, 132, 0.8)',
+            backgroundColor: '#6debdc',
 
         }, {
             type: 'line',
             label: 'Cumulative',
             data: cumulativeTransactions,
-            backgroundColor: 'blue',
+            backgroundColor: '#55a9e8',
         }],
     };
 
@@ -84,19 +84,42 @@ const DailyTransactionsChart = ({ transactions }) => {
         plugins: {
             legend: {
                 position: 'top',
+                color: '#FFFFFF',
+                labels: {
+                    color: '#FFFFFF'
+                }
             },
             title: {
                 display: true,
                 text: 'ZigZag Daily Transactions',
+                color: '#FFFFFF'
             },
         },
         scales: {
-            x: {
+            yAxes:{
+                grid: {
+                    drawBorder: true,
+                    color: '#FFFFFF',
+                },
+                ticks:{
+                    beginAtZero: true,
+                    color: 'white',
+                }
+            },
+            xAxes: {
                 type: 'time',
                 time: {
                     unit: 'day'
+                },
+                grid: {
+                    drawBorder: true,
+                    color: '#FFFFFF',
+                },
+                ticks:{
+                    beginAtZero: true,
+                    color: 'white',
                 }
-            }
+            },
         }
     };
 

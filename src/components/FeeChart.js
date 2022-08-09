@@ -60,8 +60,7 @@ const FeeChart = ({ transactions }) => {
             type: 'bar',
             label: 'Daily Fees',
             data: dailyFees,
-            backgroundColor: 'rgba(235, 99, 132, 0.8)',
-
+            backgroundColor: '#6debdc',
         }],
     };
 
@@ -70,19 +69,42 @@ const FeeChart = ({ transactions }) => {
         plugins: {
             legend: {
                 position: 'top',
+                color: '#FFFFFF',
+                labels: {
+                    color: '#FFFFFF'
+                }
             },
             title: {
                 display: true,
                 text: 'ZigZag Daily Average Fees',
+                color: '#FFFFFF'
             },
         },
         scales: {
-            x: {
+            yAxes:{
+                grid: {
+                    drawBorder: true,
+                    color: '#FFFFFF',
+                },
+                ticks:{
+                    beginAtZero: true,
+                    color: 'white',
+                }
+            },
+            xAxes: {
                 type: 'time',
                 time: {
                     unit: 'day'
+                },
+                grid: {
+                    drawBorder: true,
+                    color: '#FFFFFF',
+                },
+                ticks:{
+                    beginAtZero: true,
+                    color: 'white',
                 }
-            }
+            },
         }
     };
 

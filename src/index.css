@@ -2,7 +2,7 @@
 @tailwind components;
 
 body {
-  margin: 0;
+  margin: 5px;
   font-family: -apple-system, BlinkMacSystemFont, 'Work Sans';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -14,8 +14,4 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
-}
-
-#mainTitle {
-  color: linear-gradient(93.46deg, rgb(42, 171, 238) 16.94%, rgb(12, 207, 207) 97.24%);
 }
