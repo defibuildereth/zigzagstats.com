@@ -34,22 +34,13 @@ const FeeChart = ({ transactions }) => {
     const makeDailyFeeValues = function (transactionsArray) {
         let array = []
 
-        console.log(transactionsArray.summary)
 
         let ordered = transactionsArray.summary.sort(function (a, b) {
             return (a.date - b.date);
         });
         for (let i = 0; i < ordered.length; i++) {
             const date = new Date(ordered[i].date)
-            console.log(date)
             array.push({x:date, y: ordered[i].averageFee})
-            // if (orderedFilteredFeeArray.length > 0) {
-            //     let sum = orderedFilteredFeeArray.reduce((previousValue, currentValue) => previousValue + currentValue)
-            //     const number = sum / orderedFilteredFeeArray.length;
-            //     array.push({ x: date, y: number })
-            // } else {
-            //     array.push({x:date, y: null})
-            // }
         }
 
         return array

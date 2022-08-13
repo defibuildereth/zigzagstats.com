@@ -34,9 +34,17 @@ const DailyTransactionsChart = ({ transactions }) => {
     const makeDailyTxsValues = function (transactionsArray) {
         let array = []
 
-        for (let i = 0; i < transactionsArray.length; i++) {
-            const date = Date.parse(transactionsArray[i].date.split('-').join(' '))
-            const number = transactionsArray[i].feeArray.length
+        console.log(transactionsArray.summary)
+
+        let ordered = transactionsArray.summary.sort(function (a, b) {
+            return (a.date - b.date);
+        });
+
+        for (let i = 0; i < ordered.length; i++) {
+            const date = new Date(ordered[i].date)
+            // console.log(date)
+            const number = ordered[i].totalTxs
+            // console.log(number)
             array.push({ x: date, y: number })
         }
         return array
