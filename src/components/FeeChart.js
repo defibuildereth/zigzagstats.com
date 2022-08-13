@@ -34,22 +34,24 @@ const FeeChart = ({ transactions }) => {
     const makeDailyFeeValues = function (transactionsArray) {
         let array = []
 
-        if (transactionsArray.length > 0) {
-            let ordered = transactionsArray.sort(function (a, b) {
-                return (new Date(a.date.split('-').join(' '))).getTime() - (new Date(b.date.split('-').join(' '))).getTime();
-            });
-            for (let i = 0; i < ordered.length; i++) {
-                let orderedFilteredFeeArray = ordered[i].feeArray.filter(value => typeof (value) === 'number')
-                const date = Date.parse(ordered[i].date.split('-').join(' '))
-                if (orderedFilteredFeeArray.length > 0) {
-                    let sum = orderedFilteredFeeArray.reduce((previousValue, currentValue) => previousValue + currentValue)
-                    const number = sum / orderedFilteredFeeArray.length;
-                    array.push({ x: date, y: number })
-                } else {
-                    array.push({x:date, y: null})
-                }
-            }
+        console.log(transactionsArray.summary)
+
+        let ordered = transactionsArray.summary.sort(function (a, b) {
+            return (a.date - b.date);
+        });
+        for (let i = 0; i < ordered.length; i++) {
+            const date = new Date(ordered[i].date)
+            console.log(date)
+            array.push({x:date, y: ordered[i].averageFee})
+            // if (orderedFilteredFeeArray.length > 0) {
+            //     let sum = orderedFilteredFeeArray.reduce((previousValue, currentValue) => previousValue + currentValue)
+            //     const number = sum / orderedFilteredFeeArray.length;
+            //     array.push({ x: date, y: number })
+            // } else {
+            //     array.push({x:date, y: null})
+            // }
         }
+
         return array
     }
 
@@ -81,12 +83,12 @@ const FeeChart = ({ transactions }) => {
             },
         },
         scales: {
-            yAxes:{
+            yAxes: {
                 grid: {
                     drawBorder: true,
                     color: '#FFFFFF',
                 },
-                ticks:{
+                ticks: {
                     beginAtZero: true,
                     color: 'white',
                 }
@@ -100,7 +102,7 @@ const FeeChart = ({ transactions }) => {
                     drawBorder: true,
                     color: '#FFFFFF',
                 },
-                ticks:{
+                ticks: {
                     beginAtZero: true,
                     color: 'white',
                 }

@@ -23,9 +23,10 @@ function App() {
   const [token, setToken] = useState("")
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_API}/transactions/`)
+    fetch(`${process.env.REACT_APP_API}/transactions/summary/123`)
       .then(res => res.json())
       .then(r => {
+        console.log(r)
         setTransactions(r)
       })
     getFee()
