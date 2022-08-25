@@ -42,21 +42,33 @@ const DailyNewUsersChart = ({ transactions }) => {
         let url = `${process.env.REACT_APP_API}/addresses/`
         let addresses = await fetch(url)
         let response = await addresses.json()
-        for (let i = 0; i < txs.length; i++) {
-            const date = Date.parse(txs[i].date.split('-').join(' '))
+
+        let ordered = txs.summary.sort(function (a, b) {
+            return (a.date - b.date);
+        });
+
+        for (let i = 0; i < ordered.length; i++) {
+            const date = new Date(ordered[i].date)
             dailyNewUsers.push({ x: date, y: 0 })
         }
+
         for (let i = 0; i < response.length; i++) {
-            let rawTimeStamp = (Math.min(...response[i].timeStamps))
-            let date = new Date(rawTimeStamp)
-            date.setHours(0, 0, 0, 0)
-            let timeStamp = (date.getTime())
-            for (let j = 0; j < dailyNewUsers.length; j++) {
-                if (timeStamp == dailyNewUsers[j].x) {
-                    dailyNewUsers[j].y = dailyNewUsers[j].y + 1
+            if (response[i].timeStamps) {
+                // console.log(response[i])
+                let rawTimeStamp = (Math.min(...response[i].timeStamps))
+                // console.log(rawTimeStamp)
+                let date = new Date(rawTimeStamp)
+                date.setHours(0, 0, 0, 0)
+                let unix = Date.parse(date)
+                for (let j = 0; j < dailyNewUsers.length; j++) {
+                    if (unix == Date.parse(dailyNewUsers[j].x)) {
+                        dailyNewUsers[j].y = dailyNewUsers[j].y + 1
+                    }
                 }
             }
+
         }
+        console.log(dailyNewUsers)
         return (dailyNewUsers)
     }
 

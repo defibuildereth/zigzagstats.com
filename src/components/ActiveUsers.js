@@ -11,7 +11,6 @@ const ActiveUsers = ({activeUsers}) => {
                 <p>Daily: {activeUsersNow[1].toLocaleString()}</p>
                 <p>Weekly: {activeUsersNow[2].toLocaleString()}</p>
                 <p>Monthly: {activeUsersNow[3].toLocaleString()}</p>
-                <p>Total: {activeUsersNow[4].toLocaleString()}</p>
         </>
     )
 }

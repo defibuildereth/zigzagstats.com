@@ -77,9 +77,7 @@ function App() {
       let url = `${process.env.REACT_APP_API}/addresses/time/${timeStamp - item}`
       return apiCallLengthOnly(url)
     })
-    let allUsersUrl = `${process.env.REACT_APP_API}/addresses/`
-    promiseArray.push(apiCallLengthOnly(allUsersUrl))
-    let activeUsers = await promiseAll(promiseArray)
+    let activeUsers = Promise.all(promiseArray)
     return activeUsers
   }
 
@@ -88,15 +86,6 @@ function App() {
     let data = await response.json()
     // console.log(data.length)
     return data.length
-  }
-
-  async function promiseAll(promises, errors) {
-    return Promise.all(promises.map(p => {
-      return p.catch(e => {
-        errors.push(e.response);
-        return null;
-      })
-    }))
   }
 
   const getFee = async function () {
