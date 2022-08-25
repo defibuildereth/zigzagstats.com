@@ -77,7 +77,7 @@ function App() {
       let url = `${process.env.REACT_APP_API}/addresses/time/${timeStamp - item}`
       return apiCallLengthOnly(url)
     })
-    let activeUsers = Promise.all(promiseArray)
+    let activeUsers = await Promise.all(promiseArray)
     return activeUsers
   }
 
@@ -153,7 +153,5 @@ function App() {
     </>
   );
 }
-
-// {<UsersContainer transactions={transactions} activeUsers={activeUsers}></UsersContainer>}
 
 export default App;

@@ -17,12 +17,6 @@ import {
 
 const DailyNewUsersChart = ({ transactions }) => {
 
-    const [dailyNewUsers, setDailyNewUsers] = useState("")
-
-    useEffect(() => {
-        makeDailyNewUsersInfo()
-    }, [])
-
     ChartJS.register(
         TimeScale,
         LinearScale,
@@ -37,74 +31,20 @@ const DailyNewUsersChart = ({ transactions }) => {
 
     let txs = transactions;
 
-    async function getDailyNewUsers(txs) {
-        let dailyNewUsers = []
-        let url = `${process.env.REACT_APP_API}/addresses/`
-        let addresses = await fetch(url)
-        let response = await addresses.json()
+    const getDailyNewUsers = function (txs) {
+        let array = []
 
         let ordered = txs.summary.sort(function (a, b) {
             return (a.date - b.date);
         });
 
         for (let i = 0; i < ordered.length; i++) {
-            const date = new Date(ordered[i].date)
-            dailyNewUsers.push({ x: date, y: 0 })
+            array.push({x: new Date(ordered[i].date), y:ordered[i].dailyNewUsers})
         }
-
-        for (let i = 0; i < response.length; i++) {
-            if (response[i].timeStamps) {
-                // console.log(response[i])
-                let rawTimeStamp = (Math.min(...response[i].timeStamps))
-                // console.log(rawTimeStamp)
-                let date = new Date(rawTimeStamp)
-                date.setHours(0, 0, 0, 0)
-                let unix = Date.parse(date)
-                for (let j = 0; j < dailyNewUsers.length; j++) {
-                    if (unix == Date.parse(dailyNewUsers[j].x)) {
-                        dailyNewUsers[j].y = dailyNewUsers[j].y + 1
-                    }
-                }
-            }
-
-        }
-        console.log(dailyNewUsers)
-        return (dailyNewUsers)
-    }
-
-    async function makeDailyNewUsersInfo() {
-        let info = await getDailyNewUsers(txs)
-        setDailyNewUsers(info)
-    }
-
-    const makeDailyNewUsersCumulative = function (info) {
-        function compare(a, b) {
-            if (a.x < b.x) {
-                return -1;
-            }
-            if (a.x > b.x) {
-                return 1;
-            }
-            return 0;
-        }
-        let array = []
-        let cumulative = 0;
-
-        if (info.length > 0) {
-            let orderedInfo = info.sort(compare)
-            for (let i = 0; i < orderedInfo.length; i++) {
-                const number = orderedInfo[i].y + cumulative;
-                array.push({ x: orderedInfo[i].x, y: number })
-                cumulative = number
-            }
-        }
-
-
-
         return array
     }
 
-    const cumulativeTransactions = makeDailyNewUsersCumulative(dailyNewUsers)
+    let dailyNewUsers = getDailyNewUsers(txs)
 
     const dailyNewUsersData = {
         datasets: [{
@@ -112,13 +52,6 @@ const DailyNewUsersChart = ({ transactions }) => {
             label: 'Daily New Users',
             data: dailyNewUsers,
             backgroundColor: '#6debdc',
-
-        },
-        {
-            type: 'line',
-            label: 'Cumulative',
-            data: cumulativeTransactions,
-            backgroundColor: '#55a9e8',
         }
         ],
     };
