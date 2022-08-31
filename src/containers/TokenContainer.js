@@ -6,7 +6,6 @@ const TokenContainer = ({token}) => {
 
     const makeTokenPriceInfo = function (obj) {
         let prices = Object.values(obj)[0]
-        let marketCaps = Object.values(obj)[1]
         let volumes = Object.values(obj)[2]
         let priceArray = []
         for (let i = 0; i < prices.length; i++) {

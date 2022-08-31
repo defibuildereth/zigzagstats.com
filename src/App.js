@@ -26,7 +26,6 @@ function App() {
     fetch(`${process.env.REACT_APP_API}/transactions/summary/123`)
       .then(res => res.json())
       .then(r => {
-        console.log(r)
         setTransactions(r)
       })
     getFee()
@@ -75,17 +74,16 @@ function App() {
     let array = [hour, day, week, month]
     const promiseArray = array.map(item => {
       let url = `${process.env.REACT_APP_API}/addresses/time/${timeStamp - item}`
-      return apiCallLengthOnly(url)
+      return apiCall(url)
     })
     let activeUsers = await Promise.all(promiseArray)
     return activeUsers
   }
 
-  async function apiCallLengthOnly(url) {
+  async function apiCall(url) {
     let response = await fetch(url)
     let data = await response.json()
-    // console.log(data.length)
-    return data.length
+    return data
   }
 
   const getFee = async function () {
