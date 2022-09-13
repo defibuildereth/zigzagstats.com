@@ -46,27 +46,7 @@ const DailyTransactionsChart = ({ transactions }) => {
         return array
     }
 
-    const makeDailyTxsCumulative = function (transactionsArray) {
-
-        let array = []
-        let cumulative = 0;
-
-        if (transactionsArray.length > 0) {
-            let ordered = transactionsArray.sort(function (a, b) {
-                return (new Date(a.date.split('-').join(' '))).getTime() - (new Date(b.date.split('-').join(' '))).getTime();
-            });
-            for (let i = 0; i < ordered.length; i++) {
-                const date = Date.parse(ordered[i].date.split('-').join(' '))
-                const number = ordered[i].feeArray.length + cumulative;
-                cumulative = number
-                array.push({ x: date, y: number })
-            }
-        }
-        return array
-    }
-
     const dailyTransactions = makeDailyTxsValues(txs)
-    const cumulativeTransactions = makeDailyTxsCumulative(txs)
 
     const dailyTxsData = {
         datasets: [{
@@ -75,11 +55,6 @@ const DailyTransactionsChart = ({ transactions }) => {
             data: dailyTransactions,
             backgroundColor: '#6debdc',
 
-        }, {
-            type: 'line',
-            label: 'Cumulative',
-            data: cumulativeTransactions,
-            backgroundColor: '#55a9e8',
         }],
     };
 
