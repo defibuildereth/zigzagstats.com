@@ -51,7 +51,7 @@ const FeeChart = ({ transactions }) => {
     const dailyFeeData = {
         datasets: [{
             type: 'bar',
-            label: 'Daily Fees',
+            label: 'Daily Average Fee',
             data: dailyFees,
             backgroundColor: '#6debdc',
         }],
@@ -69,7 +69,7 @@ const FeeChart = ({ transactions }) => {
             },
             title: {
                 display: true,
-                text: 'ZigZag Daily Average Fees',
+                text: 'ZigZag Daily Average Fee',
                 color: '#FFFFFF'
             },
         },

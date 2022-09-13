@@ -6,7 +6,7 @@ const Fee = ({ fee }) => {
 
     return (
         <>
-            <p>Fee now: {feeNow.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</p>
+            <p>Fee now (zksync): {feeNow.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</p>
         </>
     )
 }

@@ -8,6 +8,7 @@ const VolumeContainer = ({transactions, volume}) => {
         <>
             <DailyTransactionsChart transactions={transactions}></DailyTransactionsChart>
             <VolumeChart volume={volume}></VolumeChart>
+            <br></br>
             <p>More Volume Information on <a href='https://www.coingecko.com/en/exchanges/zigzag'>CoinGecko</a></p>
         </>
     )
