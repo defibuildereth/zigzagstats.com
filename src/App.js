@@ -13,6 +13,7 @@ import FeeContainer from './containers/FeeContainer';
 import UsersContainer from './containers/UsersContainer';
 import VolumeContainer from './containers/VolumeContainer';
 import TokenContainer from './containers/TokenContainer';
+import Footer from './components/Footer';
 
 function App() {
 
@@ -116,7 +117,7 @@ function App() {
             content="Track new and active users per day, current and historic platform fees, total trading volume and ZZ token price history."
           />;
           <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:image" content="https://ibb.co/fQY5rfy" />
+          <meta name="twitter:image" content="https://www.zigzagstats.com/SD_ZigZagStats.com1.png" />
           <meta
             name="twitter:title"
             content="ZigZagStats.com - Key Metrics From ZigZag Exchange"
@@ -146,6 +147,8 @@ function App() {
               </Route>
             </Routes>
           </> : <p>loading...</p>}
+        <Footer></Footer>
+
         </Router>
       </HelmetProvider>
     </>
