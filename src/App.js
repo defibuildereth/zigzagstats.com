@@ -117,6 +117,7 @@ function App() {
             name="description"
             content="Track new and active users per day, current and historic platform fees, total trading volume and ZZ token price history."
           />;
+          <meta name='keywords' content='ZigZag Exchange Stats, ZZ Token Metrics, Crypto Exchange Data'/>
           <meta name="twitter:card" content="summary_large_image" />
           <meta name="twitter:image" content="https://www.zigzagstats.com/SD_ZigZagStats.com1.png" />
           <meta
