@@ -109,7 +109,7 @@ function App() {
 
   return (
     <>
-    <Seo></Seo>
+    {/* <Seo></Seo> */}
       <Router>
         <h1 id='mainTitle' className="text-3xl text-white font-bold flex justify-center ">ZigZagStats.com</h1>
         <Navbar />
