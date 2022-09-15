@@ -6,7 +6,6 @@ import {
   Route
 } from "react-router-dom";
 import axios from 'axios';
-import { Helmet } from "react-helmet";
 
 import Navbar from './containers/Navbar';
 import FeeContainer from './containers/FeeContainer';
@@ -14,6 +13,7 @@ import UsersContainer from './containers/UsersContainer';
 import VolumeContainer from './containers/VolumeContainer';
 import TokenContainer from './containers/TokenContainer';
 import Footer from './components/Footer';
+import Seo from './components/Seo';
 
 function App() {
 
@@ -109,32 +109,8 @@ function App() {
 
   return (
     <>
-      <Helmet>
-        <title>ZigZagStats.com - Key Metrics From ZigZag Exchange</title>
-        <link rel="canonical" href="https://www.zigzagstats.com/" />
-        <meta
-          name="description"
-          content="Track new and active users per day, current and historic platform fees, total trading volume and ZZ token price history."
-        />;
-        <meta name="keywords" content="ZigZag Exchange Stats, ZZ Token Metrics, ZigZag Exchange User Information" />
-        <meta property="og:url" content="https://www.zigzagstats.com/" />
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content="ZigZagStats.com - Key Metrics From ZigZag Exchange" />
-        <meta property="og:description" content="Track new and active users per day, current and historic platform fees, total trading volume and ZZ token price history." />
-        <meta property="og:image" content="https://www.zigzagstats.com/SD_ZigZagStats.com1.png" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:image" content="https://www.zigzagstats.com/SD_ZigZagStats.com1.png" />
-        <meta
-          name="twitter:title"
-          content="ZigZagStats.com - Key Metrics From ZigZag Exchange"
-        />
-        <meta name="twitter:creator" content="@DefiBuilderETH" />
-        <meta name="twitter:site" content="@DefiBuilderETH" />
-        <meta
-          name="twitter:description"
-          content="Track new and active users per day, current and historic platform fees, total trading volume and ZZ token price history."
-        />
-      </Helmet><Router>
+    <Seo></Seo>
+      <Router>
         <h1 id='mainTitle' className="text-3xl text-white font-bold flex justify-center ">ZigZagStats.com</h1>
         <Navbar />
         {activeUsers && fee && transactions && volume && token ? <>
