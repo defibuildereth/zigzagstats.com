@@ -6,8 +6,6 @@ const Seo = ({ }) => {
         <>
             <HelmetProvider>
                 <Helmet>
-                    <title>ZigZagStats.com - Key Metrics From ZigZag Exchange</title>
-                    <link rel="canonical" href="https://www.zigzagstats.com/" />
                     <meta
                         name="description"
                         content="Track new and active users per day, current and historic platform fees, total trading volume and ZZ token price history."
