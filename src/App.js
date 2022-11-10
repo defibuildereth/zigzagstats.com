@@ -19,7 +19,7 @@ function App() {
 
   const [transactions, setTransactions] = useState("")
   const [fee, setFee] = useState("")
-  const [activeUsers, setActiveUsers] = useState("")
+  // const [activeUsers, setActiveUsers] = useState("")
   const [volume, setVolume] = useState("")
   const [token, setToken] = useState("")
 
@@ -33,10 +33,10 @@ function App() {
       .then(r => {
         setFee(r)
       })
-    getActiveUsers(Date.now())
-      .then(r => {
-        setActiveUsers(r)
-      })
+    // getActiveUsers(Date.now())
+    //   .then(r => {
+    //     setActiveUsers(r)
+    //   })
     getVolume()
       .then(res => {
         setVolume(res)
@@ -67,25 +67,25 @@ function App() {
     return token
   }
 
-  const getActiveUsers = async function (timeStamp) {
-    let hour = 3.6 * 10 ** 6
-    let day = hour * 24
-    let week = day * 7
-    let month = day * 30
-    let array = [hour, day, week, month]
-    const promiseArray = array.map(item => {
-      let url = `${process.env.REACT_APP_API}/addresses/time/${timeStamp - item}`
-      return apiCall(url)
-    })
-    let activeUsers = await Promise.all(promiseArray)
-    return activeUsers
-  }
+  // const getActiveUsers = async function (timeStamp) {
+  //   let hour = 3.6 * 10 ** 6
+  //   let day = hour * 24
+  //   let week = day * 7
+  //   let month = day * 30
+  //   let array = [hour, day, week, month]
+  //   const promiseArray = array.map(item => {
+  //     let url = `${process.env.REACT_APP_API}/addresses/time/${timeStamp - item}`
+  //     return apiCall(url)
+  //   })
+  //   let activeUsers = await Promise.all(promiseArray)
+  //   return activeUsers
+  // }
 
-  async function apiCall(url) {
-    let response = await fetch(url)
-    let data = await response.json()
-    return data
-  }
+  // async function apiCall(url) {
+  //   let response = await fetch(url)
+  //   let data = await response.json()
+  //   return data
+  // }
 
   const getFee = async function () {
     let fee;
@@ -113,13 +113,13 @@ function App() {
       <Router>
         <h1 id='mainTitle' className="text-3xl text-white font-bold flex justify-center ">ZigZagStats.com</h1>
         <Navbar />
-        {activeUsers && fee && transactions && volume && token ? <>
+        {fee && transactions && volume && token ? <>
           <Routes>
             <Route path="/fees">
               <Route index element={<FeeContainer fee={fee} transactions={transactions}></FeeContainer>} />
             </Route>
             <Route path="/users">
-              <Route index element={<UsersContainer transactions={transactions} activeUsers={activeUsers}></UsersContainer>} />
+              <Route index element={<UsersContainer transactions={transactions} ></UsersContainer>} /> 
             </Route>
             <Route path="/token">
               <Route index element={<TokenContainer token={token}></TokenContainer>} />
