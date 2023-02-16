@@ -49,7 +49,7 @@ function App() {
 
   const getVolume = async function () {
     let vol;
-    await fetch('https://api.coingecko.com/api/v3/exchanges/zigzag/volume_chart?days=180')
+    await fetch('https://api.coingecko.com/api/v3/exchanges/zigzag/volume_chart?days=30')
       .then(r => r.json())
       .then(res => {
         vol = res
